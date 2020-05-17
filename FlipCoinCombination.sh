@@ -47,10 +47,12 @@ else
 fi
 
 declare -A DoubletDict
+
 DoubletDict+=(["HH"]=0 ["HT"]=0 ["TT"]=0 ["TH"]=0)
+
 for ((i = 0; i <$n; i++)); 
 do
-randomCheck=$((RANDOM%4))
+	randomCheck=$((RANDOM%4))
 	case $randomcheck in
     		0)
     	  	  DoubletDict["HH"]=$((${DoubletDict["HH"]}+1))
@@ -69,11 +71,12 @@ done
 
 for i in ${!DoubletDict[@]}
 do
-    DoubletDict[$i]=$(((${DoubletDict[$i]}*100)/$n))
+	DoubletDict[$i]=$(((${DoubletDict[$i]}*100)/$n))
 done
-arrayDoublet=($(for value in ${DoubletDict[@]}
+
+	arrayDoublet=($(for value in ${DoubletDict[@]}
 do
-    echo $value
+    	echo $value
 done | sort ))
 max=${arrayDoublet[3]}
 echo ${arrayDoublet[@]}
@@ -81,15 +84,17 @@ for key in ${!DoubletDict[@]}
 do
     if [[ $max -eq ${DoubletDict[$key]} ]]
     then
-    echo "win combo $key"
+    	echo "win combo $key"
     fi
 done
 
 declare -A TripletDict
+
 TripletDict+=(["HHH"]=0 ["HHT"]=0 ["HTH"]=0 ["THH"]=0  ["TTT"]=0 ["TTH"]=0 ["THT"]=0 ["HTT"]=0)
-for ((i = 0; i <$n ; i++)); 
+
+for ((i = 0; i <$n ; i++));
 do
-randomCheck=$((RANDOM%8))
+	randomCheck=$((RANDOM%8))
 	case $randomCheck in
     		0)
     		  TripletDict["HHH"]=$((${TripletDict["HHH"]}+1))
@@ -120,9 +125,9 @@ done
 
 for i in ${!TripletDict[@]}
 do
-    TripletDict[$i]=$(((${TripletDict[$i]}*100)/$n))
+    	TripletDict[$i]=$(((${TripletDict[$i]}*100)/$n))
 done
-arrayTriplet=($(for value in ${TripletDict[@]}
+	arrayTriplet=($(for value in ${TripletDict[@]}
 do
     echo $value
 done | sort ))
@@ -132,6 +137,6 @@ for key in ${!TripletDict[@]}
 do
     if [ $max -eq ${TripletDict[$key]} ]
     then
-    echo "win combo $key"
+    	echo "win combo $key"
     fi
 done
